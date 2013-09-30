@@ -1,0 +1,51 @@
+#!/usr/bin/env perl 
+#Addison's quick tmux multiplexor script
+use warnings;
+use strict;
+
+
+my @hosts = '';
+my $window = '';
+sub ReadHost {
+	while (<>) {
+		my @temp = split (/\s+/, $_);
+			for (@temp){
+			push(@hosts, $_)	
+			}
+		}
+} 
+
+
+sub FindWindow {
+	my $windowmass = `tmux list-windows`;
+	my @splitwin =  split (/\n/, $windowmass);
+	for (@splitwin){
+		if (m/(active)/){
+			my @a = split(/:/, $_);
+			$window = $a[0];
+			print "window = $window\n";
+		}
+	}
+}
+
+sub MakePanes  {			
+	my $i = 0;
+	for (@hosts){
+		print `tmux split-window -t $window -d "ssh $hosts[$i]"`;
+		print `tmux select-layout -t $window tiled`;
+		$i++;
+	}
+	print `tmux set-window-option synchronize-panes on`;
+	print `tmux break-pane -t 0`;
+	print `tmux select-layout -t $window tiled`
+	
+}
+
+
+
+
+
+
+ReadHost();
+FindWindow();
+MakePanes();
