@@ -9,4 +9,9 @@ Multimux reads host names from stdin, and launches ssh sessions to the host name
 
 Inspired by tmux script at: http://www.christoph-egger.org/weblog/entry/33
 
+Usage:
+ multimux [--user|-U <user>]  <whitespace delimited hosts>
+
+Inspired by tmux script at: http://www.christoph-egger.org/weblog/entry/33
+
 Written by T. Addison Leake
