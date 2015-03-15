@@ -11,6 +11,13 @@ my $hostref =  $options{'hosts'};
 my @hosts = @$hostref;
 my $window = '';
 
+while (<STDIN>){
+	my @temp = split(" ", $_);
+	for (@temp){
+		push(@hosts, $_);
+	}
+}
+
 sub FindWindow {
 	my $windowmass = `tmux list-windows`;
 	my @splitwin =  split (/\n/, $windowmass);
