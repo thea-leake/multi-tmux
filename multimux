@@ -20,6 +20,10 @@ unless (@hosts){
 		}
 	}
 }
+
+sub VPrint (@) {
+	if ($options{'verbose'}) {
+		print @_;
 	}
 }
 
@@ -30,7 +34,7 @@ sub FindWindow {
 		if (m/(active)/){
 			my @a = split(/:/, $_);
 			$window = $a[0];
-			print "window = $window\n";
+			VPrint "window = $window\n";
 		}
 	}
 }
@@ -42,13 +46,13 @@ sub MakePanes  {
 		$remote_user = "-l $options{'user'}"
 	}
 	for (@hosts){
-		print `tmux split-window -t $window -d "ssh $remote_user $hosts[$i]"`;
+		VPrint `tmux split-window -t $window -d "ssh $remote_user $hosts[$i]"`;
 		$i++;
 	}
-	print `tmux set-window-option synchronize-panes on`;
-	print `tmux break-pane -t 0`;
-	print `tmux select-layout -t $window tiled`
-	
+	VPrint `tmux set-window-option synchronize-panes on` if $options{'sync'};
+	VPrint `tmux break-pane -t 0`;
+	VPrint `tmux select-layout -t $window tiled`
+
 }
 
 
