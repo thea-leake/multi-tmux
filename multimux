@@ -43,7 +43,6 @@ sub MakePanes  {
 	}
 	for (@hosts){
 		print `tmux split-window -t $window -d "ssh $remote_user $hosts[$i]"`;
-		print `tmux select-layout -t $window tiled`;
 		$i++;
 	}
 	print `tmux set-window-option synchronize-panes on`;
