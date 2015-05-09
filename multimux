@@ -3,6 +3,9 @@
 use warnings;
 use strict;
 
+use FindBin;
+use lib $FindBin::Bin;
+
 use Params;
 
 my %options = Params::GetParams();
