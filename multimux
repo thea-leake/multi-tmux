@@ -10,14 +10,16 @@ use Params;
 
 my %options = Params::GetParams();
 
-my $hostref =  $options{'hosts'};
-my @hosts = @$hostref;
 my $window = '';
+my @hosts = @{$options{'hosts'}};
 
-while (<STDIN>){
-	my @temp = split(" ", $_);
-	for (@temp){
-		push(@hosts, $_);
+unless (@hosts){
+	while (<STDIN>){
+		for (split(/\s+/, $_)){
+			push(@hosts, $_) if $_;
+		}
+	}
+}
 	}
 }
 
