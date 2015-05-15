@@ -1,20 +1,29 @@
-#!/usr/bin/env perl 
+#!/usr/bin/env perl
 #Addison's quick tmux multiplexor script, written by T. Addison Leake.  Licensed under the GPL 2. Vers.1
 use warnings;
 use strict;
+
+use FindBin;
+use lib $FindBin::Bin;
 
 use Params;
 
 my %options = Params::GetParams();
 
-my $hostref =  $options{'hosts'};
-my @hosts = @$hostref;
 my $window = '';
+my @hosts = @{$options{'hosts'}};
 
-while (<STDIN>){
-	my @temp = split(" ", $_);
-	for (@temp){
-		push(@hosts, $_);
+unless (@hosts){
+	while (<STDIN>){
+		for (split(/\s+/, $_)){
+			push(@hosts, $_) if $_;
+		}
+	}
+}
+
+sub VPrint (@) {
+	if ($options{'verbose'}) {
+		print @_;
 	}
 }
 
@@ -25,26 +34,25 @@ sub FindWindow {
 		if (m/(active)/){
 			my @a = split(/:/, $_);
 			$window = $a[0];
-			print "window = $window\n";
+			VPrint "window = $window\n";
 		}
 	}
 }
 
-sub MakePanes  {			
+sub MakePanes {
 	my $i = 0;
 	my $remote_user = '';
 	if ($options{'user'}){
 		$remote_user = "-l $options{'user'}"
 	}
 	for (@hosts){
-		print `tmux split-window -t $window -d "ssh $remote_user $hosts[$i]"`;
-		print `tmux select-layout -t $window tiled`;
+		VPrint `tmux split-window -t $window -d "ssh $remote_user $hosts[$i]"`;
 		$i++;
 	}
-	print `tmux set-window-option synchronize-panes on`;
-	print `tmux break-pane -t 0`;
-	print `tmux select-layout -t $window tiled`
-	
+	VPrint `tmux set-window-option synchronize-panes on` if $options{'sync'};
+	VPrint `tmux break-pane -t 0`;
+	VPrint `tmux select-layout -t $window tiled`
+
 }
 
 

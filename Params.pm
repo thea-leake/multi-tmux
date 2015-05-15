@@ -9,22 +9,27 @@ Getopt::Long::Configure("pass_through");
 my $help;
 my @hosts;
 my $user;
+my $sync;
+my $verbose;
 
 GetOptions (
 	'help|H' => \$help,
 	'user|U=s' => \$user,
+	'sync|S' => \$sync,
+	'verbose' => \$verbose,
 );
 
 sub GetParams {
-       my %tmp = (
-       	  'user' => $user,  
-	  'hosts' => \@ARGV
-       );
-       return %tmp
+	return (
+		'user' => $user,
+		'sync' => $sync,
+		'verbose' => $verbose,
+		'hosts' => \@ARGV,
+	);
 }
 
 if ($help){
-	print "Usage:\n multimux [--user|-U <user>]  <whitespace delimited hosts>\n";
+	print "Usage:\n multimux [--user|-U <user>] [--sync|-U] [--verbose] [HOST ...]\n";
 	exit 0;
 }
 
