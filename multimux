@@ -47,6 +47,7 @@ sub MakePanes {
 	}
 	for (@hosts){
 		VPrint `tmux split-window -t $window -d "ssh $remote_user $hosts[$i]"`;
+		VPrint `tmux select-layout -t $window tiled`;
 		$i++;
 	}
 	VPrint `tmux set-window-option synchronize-panes on` if $options{'sync'};
