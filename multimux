@@ -51,7 +51,7 @@ sub MakePanes {
 		$i++;
 	}
 	VPrint `tmux set-window-option synchronize-panes on` if $options{'sync'};
-	VPrint `tmux break-pane -t 0`;
+	VPrint `tmux break-pane -s 0`;
 	VPrint `tmux select-layout -t $window tiled`
 
 }
