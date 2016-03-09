@@ -16,11 +16,9 @@ my %options = Params::GetParams();
 my $window = '';
 my @hosts = @{$options{'hosts'}};
 
-unless (@hosts){
-	while (<STDIN>){
-		for (split(/\s+/, $_)){
-			push(@hosts, $_) if $_;
-		}
+while (<STDIN>){
+	for (split(/\s+/, $_)){
+		push(@hosts, $_) if $_;
 	}
 }
 
