@@ -1,5 +1,8 @@
 #!/usr/bin/env perl
-#Addison's quick tmux multiplexor script, written by T. Addison Leake.  Licensed under the GPL 2. Vers.1
+
+# Addison's quick tmux multiplexor script, written by Addison Leake.
+# Licensed under the GPL 2. Vers.1
+
 use warnings;
 use strict;
 
@@ -48,16 +51,21 @@ sub GetTmuxVersion {
 
 sub MakePanes {
         my $break_opt = '-t';
-	my $remote_user = '';
+	my $ssh_opts = '';
         if (GetTmuxVersion() >= 2.1){
             $break_opt = '-s'
         }
 	if ($options{'user'}){
-		$remote_user = "-l $options{'user'}"
+		$ssh_opts .= " -l $options{'user'} "
+	}
+	if ($options{'extended'}){
+		$ssh_opts .= $options{'extended'}
 	}
 	for (@hosts){
 		VPrint "\nsplitting window for host $_";
-		VPrint `tmux split-window -t $window -d "ssh $remote_user $_"`;
+		my $ssh_cmd = "ssh $ssh_opts $_";
+		VPrint "ssh command: $ssh_cmd";
+		VPrint `tmux split-window -t $window -d $ssh_cmd`;
 		VPrint `tmux select-layout -t $window tiled`;
 	}
 	VPrint "\nbreaking original pane off";

@@ -19,8 +19,8 @@ Hosts are separated by whitespace when given as arguments, and separated by whit
 
 
 Usage:
- multimux [--user|-U user] [--sync|-U] [--verbose] [HOSTS | path_to_hosts_file]
+ multimux [--user|-U user] [--sync|-S] [--verbose] [--extended-opts 'quote_wrapped_additional_ssh_args'] [ path_to_hosts_file | whitespace_separated_hosts ]
 
-Inspired by tmux script at: http://www.christoph-egger.org/weblog/entry/33
+Idea taken from: http://www.christoph-egger.org/weblog/entry/33
 
 Written by T. Addison Leake
