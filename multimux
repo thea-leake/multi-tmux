@@ -60,13 +60,13 @@ sub MakePanes {
 		$ssh_opts .= $options{'extended'}
 	}
 	for (@hosts){
-		VPrint "\nsplitting window for host $_";
+		VPrint "\nsplitting window for host $_ ";
 		my $ssh_cmd = "ssh $ssh_opts $_";
-		VPrint "ssh command: $ssh_cmd";
+		VPrint "\nssh command: $ssh_cmd ";
 		VPrint `tmux split-window -t $window -d $ssh_cmd`;
 		VPrint `tmux select-layout -t $window tiled`;
 	}
-	VPrint "\nbreaking original pane off";
+	VPrint "\nbreaking original pane off\n";
 	VPrint `tmux set-window-option synchronize-panes on` if $options{'sync'};
 	VPrint `tmux break-pane $break_opt 0`;
 	VPrint `tmux select-layout -t $window tiled`
