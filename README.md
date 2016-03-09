@@ -1,7 +1,7 @@
 multimux
 ========
 
-Tmux multiplexer perl script
+Tmux ssh multiplexer script
 
 
 Multimux reads host names from stdin, and after options, and launches ssh sessions to the host names in tmux panes in a single tmux window, with input synchronized. 
@@ -19,7 +19,7 @@ Hosts are separated by whitespace when given as arguments, and separated by whit
 
 
 Usage:
- multimux [--user|-U <user>] [--sync|-U] [--verbose] [HOSTS | <path to hosts file>]
+ multimux [--user|-U user] [--sync|-U] [--verbose] [HOSTS | path_to_hosts_file]
 
 Inspired by tmux script at: http://www.christoph-egger.org/weblog/entry/33
 
