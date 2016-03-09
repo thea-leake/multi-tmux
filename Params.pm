@@ -11,13 +11,14 @@ my @hosts;
 my $user;
 my $sync;
 my $verbose;
+my $extended;
 
 GetOptions (
 	'help|H' => \$help,
 	'user|U=s' => \$user,
 	'sync|S' => \$sync,
 	'verbose' => \$verbose,
-	'extended-opts' => \$extended
+	'extended-opts|E=s' => \$extended
 );
 
 sub GetParams {
@@ -32,8 +33,9 @@ sub GetParams {
 
 if ($help){
 	print "Usage:\n multimux [--user|-U <user>] [--sync|-S] [--verbose]"
-		. "[--extended-opts <quote wrapped additional ssh args]"
-		. "[ path_to_hosts_file | whitespace_separated_hosts ]\n";
+		. "[--extended-opts|-E 'quote_wrapped_additional_ssh_args']"
+		. "[ path_to_hosts_file | whitespace_separated_hosts ]\n\n"
+		. "Hosts as arguments must come after other options.";
 	exit 0;
 }
 

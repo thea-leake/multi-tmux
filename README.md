@@ -17,6 +17,8 @@ Hosts are separated by whitespace when given as arguments, and separated by whit
 
 --verbose gives verbose output - mostly tmux commands that are run
 
+Order for named arguments does not matter, however if hosts or a file are specified as arguments they must be last.
+
 
 Usage:
  multimux [--user|-U user] [--sync|-S] [--verbose] [--extended-opts 'quote_wrapped_additional_ssh_args'] [ path_to_hosts_file | whitespace_separated_hosts ]

@@ -63,7 +63,9 @@ sub MakePanes {
 	}
 	for (@hosts){
 		VPrint "\nsplitting window for host $_";
-		VPrint `tmux split-window -t $window -d "ssh $ssh_opts $_"`;
+		my $ssh_cmd = "ssh $ssh_opts $_";
+		VPrint "ssh command: $ssh_cmd";
+		VPrint `tmux split-window -t $window -d $ssh_cmd`;
 		VPrint `tmux select-layout -t $window tiled`;
 	}
 	VPrint "\nbreaking original pane off";
