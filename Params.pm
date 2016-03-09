@@ -17,6 +17,7 @@ GetOptions (
 	'user|U=s' => \$user,
 	'sync|S' => \$sync,
 	'verbose' => \$verbose,
+	'extended-opts' => \$extended
 );
 
 sub GetParams {
@@ -24,12 +25,15 @@ sub GetParams {
 		'user' => $user,
 		'sync' => $sync,
 		'verbose' => $verbose,
+		'extended' => $extended,
 		'hosts' => \@ARGV,
 	);
 }
 
 if ($help){
-	print "Usage:\n multimux [--user|-U <user>] [--sync|-U] [--verbose] [HOST ...]\n";
+	print "Usage:\n multimux [--user|-U <user>] [--sync|-S] [--verbose]"
+		. "[--extended-opts <quote wrapped additional ssh args]"
+		. "[ path_to_hosts_file | whitespace_separated_hosts ]\n";
 	exit 0;
 }
 
