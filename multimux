@@ -39,18 +39,30 @@ sub FindWindow {
 	}
 }
 
+sub GetTmuxVersion {
+    my $ver_string = `tmux -V`;
+    $ver_string =~ m/tmux\s+([0-9]+\.[0-9]+)/;
+    VPrint $1;
+    return $1
+}
+
 sub MakePanes {
 	my $i = 0;
+        my $break_opt = '-t';
 	my $remote_user = '';
+        if (GetTmuxVersion() >= 2.1){
+            $break_opt = '-s'
+        }
 	if ($options{'user'}){
 		$remote_user = "-l $options{'user'}"
 	}
 	for (@hosts){
 		VPrint `tmux split-window -t $window -d "ssh $remote_user $hosts[$i]"`;
+		VPrint `tmux select-layout -t $window tiled`;
 		$i++;
 	}
 	VPrint `tmux set-window-option synchronize-panes on` if $options{'sync'};
-	VPrint `tmux break-pane -t 0`;
+	VPrint `tmux break-pane $break_opt 0`;
 	VPrint `tmux select-layout -t $window tiled`
 
 }
