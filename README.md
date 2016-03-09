@@ -28,4 +28,4 @@ Usage: `multimux [--user|-U user] [--sync|-S] [--verbose] [--extended-opts 'quot
 
 Idea taken from: http://www.christoph-egger.org/weblog/entry/33
 
-Written by T. Addison Leake
+Written by Addison Leake
