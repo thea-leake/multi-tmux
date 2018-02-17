@@ -10,16 +10,16 @@ Multimux expects to be run from an existing tmux session, and will launch ssh se
 
 
 
-**Usage**: 
+**Usage**:
 `multimux [--user|-U user] [--sync|-S] [--verbose] [--extended-opts 'quote_wrapped_additional_ssh_args'] [ whitespace_separated_hosts ] [ < path_to_file ] `
 
 
-Hosts can be piped in, given as arguments, or in file redirected to stdin: `< path`.  
+Hosts can be piped in, given as arguments, or in file redirected to stdin: `< path >`.
 
 
 Hosts are indivdual arguments when passed as arguments, and separated by whitespace or newlines when piped in or read from file.
 
-It can only read from one source of STDIN -file redirected or piped in, but it can combine host arguments and STDIN hosts. 
+It can only read from one source of STDIN -file redirected or piped in, but it can combine host arguments and STDIN hosts.
 
 
 
@@ -52,4 +52,4 @@ All arguments are optional, order does not matter:
 Idea taken from: http://www.christoph-egger.org/weblog/entry/33.
 
 ========
-Written by Addison Leake
+Written by Thea Addison Leake

@@ -16,16 +16,20 @@ my %options = Params::GetParams();
 my $window = '';
 my @hosts = @{$options{'hosts'}};
 
-while (<STDIN>){
-	for (split(/\s+/, $_)){
-		push(@hosts, $_) if $_;
-	}
-}
-
 sub VPrint (@) {
 	if ($options{'verbose'}) {
 		print @_;
 	}
+}
+
+
+unless (-t STDIN) {
+    VPrint "Reading hosts in from STDIN \n";
+    while (<STDIN>){
+	    for (split(/\s+/, $_)){
+		    push(@hosts, $_) if $_;
+	    }
+    }
 }
 
 sub FindWindow {
