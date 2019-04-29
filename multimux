@@ -1,8 +1,5 @@
 #!/usr/bin/env perl
 
-# Addison's quick tmux multiplexor script, written by Addison Leake.
-# Licensed under the GPL 2. Vers.1
-
 use warnings;
 use strict;
 
